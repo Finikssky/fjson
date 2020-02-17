@@ -40,7 +40,10 @@ fjson_object_t * fjson_object_create()
 void fjson_object_free(fjson_object_t *object)
 {
 	if (object->children)
+	{
 		avl_tree_clear_all(object->children, free_obj_child, NULL);
+		delete_avl_tree(object->children);
+	}
 
 	free(object);
 }
